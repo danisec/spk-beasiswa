@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-white font-nunito
+    }
+
+    .layout {
+        @apply px-4 xs:px-4 sm:px-8 lg:px-16 2xl:px-20;
+    }
+    
+    [x-cloak] { display: none !important; }
+
+    .field-input {
+        @apply block w-96 rounded-lg border border-slate-100 bg-slate-50 p-3 text-lg font-semibold text-gray-900 focus:ring-blue-100;
+    }
+
+    .invalid-feedback {
+        @apply w-96 text-sm font-medium tracking-wide text-red-500;
+    }
+
+    .btn-auth {
+        @apply h-12 w-96 rounded-lg bg-blue-600 text-center text-base font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300;
+    }
+}

@@ -23,6 +23,24 @@ class header extends Component
      */
     public function render()
     {
-        return view('components.organisms.header');
+        $navbar = [
+            "Home" => "",
+        ];
+
+        $inputData = [
+            "Data Beasiswa" => "data-beasiswa",
+            "Kriteria" => "data-kriteria",
+            "Model" => "data-model",
+        ];
+
+        $daftarBeasiswa = [
+            "Daftar Beasiswa" => "daftar-beasiswa",
+        ];
+
+        $report = [
+            "Laporan" => "Laporan",
+        ];
+
+        return view("components.organisms.header", compact("navbar", "inputData","daftarBeasiswa", "report"));
     }
 }
