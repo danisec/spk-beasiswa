@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Beasiswa;
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
 
@@ -15,12 +14,21 @@ class KriteriaController extends Controller
      */
     public function index()
     {
-        $beasiswa = Beasiswa::orderBy('nama', 'asc')->get();
-
         return view('pages.kriteria.index', [
-            'title' => 'Data Kriteria',
-            'kriteria' => Kriteria::orderBy('id_kriteria', 'asc')->paginate(6)->withQueryString(),
-            'beasiswa' => $beasiswa,
+            'title' => 'Kriteria',
+            'kriteria' => Kriteria::orderBy('nama_kriteria', 'asc')->paginate(10)->withQueryString(),
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('pages.kriteria.create', [
+            'title' => 'Tambah Kriteria',
         ]);
     }
 
@@ -33,17 +41,37 @@ class KriteriaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'id_beasiswa' => 'required',
-            'nama_kriteria' => 'required|max:100',
-            'sifat' => 'required',
-            'syarat' => 'required',
+            'nama_kriteria' => 'required|unique:kriteria,nama_kriteria',
+            'attribut' => 'required|in:Benefit,Cost',
+            'bobot' => 'required|numeric',
+        ], [
+            'nama_kriteria.required' => 'Nama Kriteria tidak boleh kosong',
+            'nama_kriteria.unique' => 'Nama Kriteria sudah ada',
+            'attribut.required' => 'Attribut tidak boleh kosong',
+            'attribut.in' => 'Attribut harus diisi dengan Benefit atau Cost',
+            'bobot.required' => 'Bobot tidak boleh kosong',
+            'bobot.numeric' => 'Bobot harus diisi dengan angka',
         ]);
 
         Kriteria::create($validatedData);
 
         $notif = notify()->success('Data Kriteria Berhasil Ditambahkan');
 
-        return redirect('/data-kriteria')->with('notif', $notif);
+        return redirect('/kriteria')->with('notif', $notif);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Kriteria  $kriteria
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        return view('pages.kriteria.show', [
+            'title' => 'View Kriteria',
+            'kriteria' => Kriteria::where('id', $id)->first(),
+        ]);
     }
 
     /**
@@ -54,12 +82,10 @@ class KriteriaController extends Controller
      */
     public function edit($id)
     {
-        $beasiswa = Beasiswa::orderBy('nama', 'asc')->get();
-
         return view('pages.kriteria.edit', [
-            'title' => 'Edit Data Kriteria',
-            'kriteria' => Kriteria::where('id_kriteria', $id)->first(),
-            'beasiswa' => $beasiswa,
+            'title' => 'Ubah Kriteria',
+            'attribut' => ['Benefit', 'Cost'],
+            'kriteria' => Kriteria::where('id', $id)->first(),
         ]);
     }
 
@@ -73,17 +99,20 @@ class KriteriaController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'id_beasiswa' => '',
-            'nama_kriteria' => 'max:100',
-            'sifat' => '',
-            'syarat' => '',
+            'nama_kriteria' => '',
+            'attribut' => 'in:Benefit,Cost',
+            'bobot' => 'numeric',
+        ], [
+            'nama_kriteria.unique' => 'Nama Kriteria sudah ada',
+            'attribut.in' => 'Attribut harus diisi dengan Benefit atau Cost',
+            'bobot.numeric' => 'Bobot harus diisi dengan angka',
         ]);
 
-        Kriteria::where('id_kriteria', $id)->update($validatedData);
+        Kriteria::where('id', $id)->update($validatedData);
 
         $notif = notify()->success('Data Kriteria Berhasil Diubah');
 
-        return redirect('/data-kriteria')->with('notif', $notif);
+        return redirect('/kriteria')->with('notif', $notif);
     }
 
     /**
@@ -94,10 +123,11 @@ class KriteriaController extends Controller
      */
     public function destroy($id)
     {
-        Kriteria::where('id_kriteria', $id)->delete();
+        Kriteria::where('id', $id)->delete();
         
         $notif = notify()->success('Data Kriteria Berhasil Dihapus');
+        session()->flash('notif', $notif);
         
-        return redirect('/data-kriteria')->with('notif', $notif);
+        return back();
     }
 }

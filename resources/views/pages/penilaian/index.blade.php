@@ -4,7 +4,7 @@
         <div class="w-full">
 
             <div class="flex justify-end">
-                <a href="{{ route('kriteria.create') }}">
+                <a href="{{ route('penilaian.create') }}">
                     <button class="btn-primary h-12 w-24">Tambah</button>
                 </a>
             </div>
@@ -17,13 +17,22 @@
                                 No
                             </th>
                             <th class="px-6 py-3" scope="col">
-                                Nama Kriteria
+                                Nama Alternatif
                             </th>
                             <th class="px-6 py-3" scope="col">
-                                Attribut Kriteria
+                                IPK
                             </th>
                             <th class="px-6 py-3" scope="col">
-                                Bobot Kriteria
+                                Penghasilan Orang Tua
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Saudara Kandung
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Semester
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Tanggungan Orang Tua
                             </th>
                             <th class="px-6 py-3 text-center" scope="col">
                                 Aksi
@@ -31,31 +40,40 @@
                         </tr>
                     </thead>
 
-                    @foreach ($kriteria as $item)
+                    @foreach ($penilaian as $item)
                         <tbody>
                             <tr class="border-b bg-white">
                                 <td class="px-4 py-4 text-base font-normal text-gray-900">
-                                    {{ ($kriteria->currentPage() - 1) * $kriteria->perPage() + $loop->iteration }}
+                                    {{ ($penilaian->currentPage() - 1) * $penilaian->perPage() + $loop->iteration }}
                                 </td>
                                 <td class="px-6 py-4 text-base font-normal text-gray-900">
-                                    {{ $item->nama_kriteria }}
+                                    {{ $item->alternatif->nama_alternatif }}
+                                </td>
+                                <td class="py-4 text-center text-base font-normal text-gray-900">
+                                    {{ $item->ipk->nama_crips }}
                                 </td>
                                 <td class="px-6 py-4 text-base font-normal text-gray-900">
-                                    {{ $item->attribut }}
+                                    {{ $item->penghasilan->nama_crips }}
                                 </td>
                                 <td class="px-6 py-4 text-base font-normal text-gray-900">
-                                    {{ $item->bobot }}
+                                    {{ $item->saudara->nama_crips }}
+                                </td>
+                                <td class="px-6 py-4 text-base font-normal text-gray-900">
+                                    {{ $item->semester->nama_crips }}
+                                </td>
+                                <td class="px-6 py-4 text-base font-normal text-gray-900">
+                                    {{ $item->tanggungan->nama_crips }}
                                 </td>
                                 <td class="flex flex-row justify-center gap-4 py-4">
-                                    <a href="{{ route('kriteria.show', $item->id) }}">
+                                    <a href="{{ route('penilaian.show', $item->id) }}">
                                         <button class="btn-gray h-9 w-16" type="button">View</button>
                                     </a>
 
-                                    <a href="{{ route('kriteria.edit', $item->id) }}">
+                                    <a href="{{ route('penilaian.edit', $item->id) }}">
                                         <button class="btn-primary h-9 w-16" type="button">Edit</button>
                                     </a>
 
-                                    <form action="{{ route('kriteria.destroy', $item->id) }}" method="post">
+                                    <form action="{{ route('penilaian.destroy', $item->id) }}" method="post">
                                         @method('delete')
                                         @csrf
 
@@ -70,7 +88,7 @@
                 </table>
 
                 <div class="p-6">
-                    {{ $kriteria->links('vendor.pagination.tailwind') }}
+                    {{ $penilaian->links('vendor.pagination.tailwind') }}
                 </div>
 
             </div>

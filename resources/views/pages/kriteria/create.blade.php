@@ -4,18 +4,17 @@
 
         <div class="mx-auto w-6/12">
             <div class="rounded-t-lg bg-slate-200 py-4">
-                <h2 class="text-center text-2xl font-bold text-gray-800">Ubah Data Kriteria
+                <h2 class="text-center text-2xl font-bold text-gray-800">Tambah Data Kriteria
                 </h2>
             </div>
 
-            <form class="mt-6 flex flex-col gap-6" action="{{ route('kriteria.update', $kriteria->id) }}" method="post">
-                @method('put')
+            <form class="mt-6 flex flex-col gap-6" action="{{ route('kriteria.store') }}" method="post">
                 @csrf
 
                 <div>
                     <input class="@error('nama_kriteria') border-red-300 bg-red-300 @enderror field-input w-full"
-                        name="nama_kriteria" type="text" value="{{ $kriteria->nama_kriteria }}"
-                        placeholder="Nama Kriteria" required>
+                        name="nama_kriteria" type="text" value="{{ old('nama_kriteria') }}" placeholder="Nama Kriteria"
+                        required>
 
                     @error('nama_kriteria')
                         <p class="invalid-feedback">
@@ -27,12 +26,10 @@
                 <div>
                     <select class="@error('attribut') border-red-300 bg-red-300 @enderror field-input w-full"
                         name="attribut" required>
+                        <option selected disabled hidden>Attribut Kriteria</option>
 
-                        @foreach ($attribut as $attr)
-                            <option value="{{ $attr }}" {{ $kriteria->attribut == $attr ? 'selected' : '' }}>
-                                {{ $attr }}
-                            </option>
-                        @endforeach
+                        <option value="Benefit">Benefit</option>
+                        <option value="Cost">Cost</option>
 
                     </select>
 
@@ -45,7 +42,7 @@
 
                 <div>
                     <input class="@error('bobot') border-red-300 bg-red-300 @enderror field-input w-full" name="bobot"
-                        type="text" value="{{ $kriteria->bobot }}" placeholder="Bobot Kriteria" required>
+                        type="text" value="{{ old('bobot') }}" placeholder="Bobot Kriteria" required>
 
                     @error('bobot')
                         <p class="invalid-feedback">
@@ -59,7 +56,7 @@
                         <button class="btn-gray h-12 w-52" type="button">Kembali</button>
                     </a>
 
-                    <button class="btn-primary h-12 w-full" type="submit">Ubah</button>
+                    <button class="btn-primary h-12 w-full" type="submit">Simpan</button>
                 </div>
             </form>
         </div>

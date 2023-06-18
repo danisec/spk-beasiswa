@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                <button class="btn-auth" type="submit">Login</button>
+                <button class="btn-primary h-12 w-96" type="submit">Login</button>
             </form>
 
         </div>

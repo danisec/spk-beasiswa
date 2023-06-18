@@ -4,7 +4,7 @@
         <div class="w-full">
 
             <div class="flex justify-end">
-                <a href="{{ route('kriteria.create') }}">
+                <a href="{{ route('crips.create') }}">
                     <button class="btn-primary h-12 w-24">Tambah</button>
                 </a>
             </div>
@@ -20,10 +20,10 @@
                                 Nama Kriteria
                             </th>
                             <th class="px-6 py-3" scope="col">
-                                Attribut Kriteria
+                                Nama Crips
                             </th>
                             <th class="px-6 py-3" scope="col">
-                                Bobot Kriteria
+                                Bobot Crips
                             </th>
                             <th class="px-6 py-3 text-center" scope="col">
                                 Aksi
@@ -31,31 +31,31 @@
                         </tr>
                     </thead>
 
-                    @foreach ($kriteria as $item)
+                    @foreach ($crips as $item)
                         <tbody>
                             <tr class="border-b bg-white">
                                 <td class="px-4 py-4 text-base font-normal text-gray-900">
-                                    {{ ($kriteria->currentPage() - 1) * $kriteria->perPage() + $loop->iteration }}
+                                    {{ ($crips->currentPage() - 1) * $crips->perPage() + $loop->iteration }}
                                 </td>
                                 <td class="px-6 py-4 text-base font-normal text-gray-900">
-                                    {{ $item->nama_kriteria }}
+                                    {{ $item->kriteria->nama_kriteria }}
                                 </td>
                                 <td class="px-6 py-4 text-base font-normal text-gray-900">
-                                    {{ $item->attribut }}
+                                    {{ $item->nama_crips }}
                                 </td>
                                 <td class="px-6 py-4 text-base font-normal text-gray-900">
                                     {{ $item->bobot }}
                                 </td>
                                 <td class="flex flex-row justify-center gap-4 py-4">
-                                    <a href="{{ route('kriteria.show', $item->id) }}">
+                                    <a href="{{ route('crips.show', $item->id) }}">
                                         <button class="btn-gray h-9 w-16" type="button">View</button>
                                     </a>
 
-                                    <a href="{{ route('kriteria.edit', $item->id) }}">
+                                    <a href="{{ route('crips.edit', $item->id) }}">
                                         <button class="btn-primary h-9 w-16" type="button">Edit</button>
                                     </a>
 
-                                    <form action="{{ route('kriteria.destroy', $item->id) }}" method="post">
+                                    <form action="{{ route('crips.destroy', $item->id) }}" method="post">
                                         @method('delete')
                                         @csrf
 
@@ -70,7 +70,7 @@
                 </table>
 
                 <div class="p-6">
-                    {{ $kriteria->links('vendor.pagination.tailwind') }}
+                    {{ $crips->links('vendor.pagination.tailwind') }}
                 </div>
 
             </div>

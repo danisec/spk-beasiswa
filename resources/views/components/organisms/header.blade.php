@@ -1,4 +1,4 @@
-<header class="layout sticky top-0 flex flex-row items-center bg-blue-800 py-8 text-white">
+<header class="layout sticky top-0 z-50 flex flex-row items-center bg-blue-800 py-8 text-white">
 
     <div class="left-0 right-0 mx-auto">
         <ul>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
 
-                @foreach ($daftarBeasiswa as $name => $url)
+                @foreach ($penilaian as $name => $url)
                     <a class="{{ request()->segment(1) == $url
                         ? 'text-white font-semibold text-lg bg-indigo-600 rounded-md px-4 py-2 transition-all ease-in'
                         : 'text-white font-normal text-lg' }}"

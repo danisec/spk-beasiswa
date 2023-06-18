@@ -14,14 +14,22 @@
     [x-cloak] { display: none !important; }
 
     .field-input {
-        @apply block w-96 rounded-lg border border-slate-100 bg-slate-50 p-3 text-lg font-semibold text-gray-900 focus:ring-blue-100;
+        @apply block rounded-lg border border-slate-100 bg-slate-50 p-3 text-lg font-semibold text-gray-900 focus:ring-blue-100;
     }
 
     .invalid-feedback {
         @apply w-96 text-sm font-medium tracking-wide text-red-500;
     }
 
-    .btn-auth {
-        @apply h-12 w-96 rounded-lg bg-blue-600 text-center text-base font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300;
+    .btn-primary {
+        @apply rounded-md bg-blue-600 text-center text-base font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300;
+    }
+
+    .btn-gray {
+        @apply rounded-md bg-gray-300 text-center text-base font-semibold text-gray-900 hover:bg-slate-400 focus:outline-none focus:ring-4 focus:ring-slate-300;
+    }
+
+    .btn-red {
+        @apply rounded-md bg-red-600 text-center text-base font-semibold text-white hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300;
     }
 }

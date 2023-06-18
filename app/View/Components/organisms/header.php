@@ -28,9 +28,13 @@ class header extends Component
         ];
 
         $inputData = [
-            "Data Beasiswa" => "data-beasiswa",
-            "Kriteria" => "data-kriteria",
-            "Model" => "data-model",
+            "Kriteria" => "kriteria",
+            "Alternatif" => "alternatif",
+            "Crips" => 'crips',
+        ];
+
+        $penilaian = [
+            "Penilaian" => "penilaian",
         ];
 
         $daftarBeasiswa = [
@@ -38,9 +42,9 @@ class header extends Component
         ];
 
         $report = [
-            "Laporan" => "Laporan",
+            "Laporan" => "perhitungan",
         ];
 
-        return view("components.organisms.header", compact("navbar", "inputData","daftarBeasiswa", "report"));
+        return view("components.organisms.header", compact("navbar", "inputData","penilaian","daftarBeasiswa", "report"));
     }
 }

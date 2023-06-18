@@ -9,8 +9,8 @@
                 @csrf
 
                 <div>
-                    <input class="@error('name') border-red-100 bg-red-100 @enderror field-input" name="name"
-                        type="text" value="{{ old('name') }}" placeholder="Nama Lengkap" required>
+                    <input class="@error('name') border-red-100 bg-red-100 @enderror field-input w-full w-full"
+                        name="name" type="text" value="{{ old('name') }}" placeholder="Nama Lengkap" required>
 
                     @error('name')
                         <p class="invalid-feedback">
@@ -20,8 +20,8 @@
                 </div>
 
                 <div>
-                    <input class="@error('username') border-red-100 bg-red-100 @enderror field-input" name="username"
-                        type="text" value="{{ old('username') }}" placeholder="Username" required>
+                    <input class="@error('username') border-red-100 bg-red-100 @enderror field-input w-full"
+                        name="username" type="text" value="{{ old('username') }}" placeholder="Username" required>
 
                     @error('username')
                         <p class="invalid-feedback">
@@ -31,7 +31,7 @@
                 </div>
 
                 <div>
-                    <input class="@error('email') border-red-100 bg-red-100 @enderror field-input" name="email"
+                    <input class="@error('email') border-red-100 bg-red-100 @enderror field-input w-full" name="email"
                         type="email" value="{{ old('email') }}" placeholder="Email" required>
 
                     @error('email')
@@ -42,8 +42,8 @@
                 </div>
 
                 <div>
-                    <input class="@error('password') border-red-100 bg-red-100 @enderror field-input" name="password"
-                        type="password" placeholder="Password" required>
+                    <input class="@error('password') border-red-100 bg-red-100 @enderror field-input w-full"
+                        name="password" type="password" placeholder="Password" required>
                 </div>
 
                 <div class="flex items-center justify-end">
@@ -52,7 +52,7 @@
                     </p>
                 </div>
 
-                <button class="btn-auth" type="submit">Register</button>
+                <button class="btn-primary h-12 w-96" type="submit">Register</button>
             </form>
 
         </div>
